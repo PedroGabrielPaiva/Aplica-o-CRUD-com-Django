@@ -1,0 +1,20 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h2> Comentários sobre a resenha "{{resenha.title}}"</h2>
+{% for c in comments %}
+    <p><b>{{ c.autor }} - {{ c.date|date:"d/m/Y H:i" }}:</b></p>
+    <p>{{ c.text }}</p>
+    <hr>
+{% empty %}
+    <p>Sem comentários ainda.</p>
+{% endfor %}
+
+<a href="{% url 'livros:create_comment' resenha.id %}">
+    <button>Adicionar comentário</button>
+</a>
+
+<a href="{% url 'livros:detail' resenha.id %}">
+    <button>Voltar para a resenha</button>
+</a>
+{% endblock %}

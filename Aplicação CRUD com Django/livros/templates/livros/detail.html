@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{% block content %}
+    <h2>{{ resenha.title }}</h2>
+    
+
+    {% if resenha.image %}
+        <img src="{{ resenha.image.url }}" width="200" alt="Capa do livro {{ resenha.title }}">
+    {% else %}
+        <p>A resenha não possui imagem/capa.</p> 
+    {% endif %}
+    
+
+    <p>Autor da Resenha: {{ resenha.autor }} - Data de Publicação: {{ resenha.data_postagem|date:"d/m/Y" }}</p>
+    
+    <hr>
+    
+    <h3>Autor do Livro:</h3>
+    <p>{{ resenha.autor_nome }}</p>
+    
+    
+    <h3>Corpo da Resenha:</h3>
+    <p>{{ resenha.resenha|safe }}</p>
+    
+
+    <h3>Categorias:</h3>
+    <p>
+        {% for category in resenha.categories.all %}
+            <a href="{% url 'livros:category_detail' category.pk %}">{{ category.name }}</a>
+            {% if not forloop.last %}, {% endif %}
+        {% empty %}
+            <p>Nenhuma categoria atribuída.</p>
+        {% endfor %}
+    </p>
+
+    <hr>
+
+    <a href="{% url 'livros:update' resenha.id %}">Editar resenha</a> |
+    <a href="{% url 'livros:delete' resenha.id %}">Deletar resenha</a>
+
+    <section>
+        <header><h3>Comentários</h3></header>
+
+        <a href="{% url 'livros:view_comments' resenha.id %}">
+            <button>Ver comentários</button>
+        </a>
+    </section>
+{% endblock content %}

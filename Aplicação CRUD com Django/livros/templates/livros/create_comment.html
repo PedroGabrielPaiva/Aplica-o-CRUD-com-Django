@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    Adicionar comentário à resenha "{{resenha.title}}"
+{% endblock title %}
+
+{% block content %}
+<form method="post" action = "{% url 'livros:create_comment' resenha.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar comentário</button>
+</form>
+
+{# Opcional: Adicionar um link de voltar para a resenha #}
+<p><a href="{% url 'livros:detail' resenha.id %}">Voltar para a resenha</a></p>
+{% endblock content %}

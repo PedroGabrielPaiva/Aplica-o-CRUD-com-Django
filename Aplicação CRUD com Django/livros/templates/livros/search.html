@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h2> Busca resenha pelo nome:</h2>
+<form action="{% url 'livros:search' %}">
+    <p>
+        <label for="id_query">Título do Livro:</label>
+        <input type="text" name="query" id="id_query"/>
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+{% if resenha_list %}
+    <h2> Resenhas encontradas:</h2>
+    <section> 
+        {% for resenha in resenha_list %}
+        <article>
+            {# Adicionando link para o detalhe #}
+            <a href="{% url 'livros:detail' resenha.id %}">
+                <p>{{ resenha.title }}</p>
+            </a>
+        </article>
+        {% endfor %}
+    </section>
+{% else %}
+    <p>Nenhuma resenha encontrada.</p>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Todas as Categorias</h2>
+
+    {% for category in categories %}
+        <p>
+            <a href="{% url 'livros:category_detail' category.pk %}">
+                {{ category.name }} ({{ category.resenhas.count }} Resenhas)
+            </a>
+            <br>{{ category.description }}
+        </p>
+        <hr>
+    {% empty %}
+        <p>Nenhuma categoria cadastrada.</p>
+    {% endfor %}
+{% endblock content %}

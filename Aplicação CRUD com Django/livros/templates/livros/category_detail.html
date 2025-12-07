@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Resenhas na categoria: {{ categoria.name }}</h2>
+
+{% if resenhas %}
+    <ul>
+    {% for resenha in resenhas %}
+        <li>
+            <a href="{% url 'livros:detail' resenha.id %}">
+                {{ resenha.title }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhuma resenha encontrada nesta categoria.</p>
+{% endif %}
+
+<a href="{% url 'livros:categoria' %}">Voltar para a Lista de Categorias</a>
+{% endblock content %}

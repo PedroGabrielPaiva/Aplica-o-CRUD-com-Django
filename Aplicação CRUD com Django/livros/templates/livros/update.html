@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h2> Atualizar resenha "{{resenha.title}}"</h2>
+<p> Capa/Imagem atual: {% if resenha.image %} {{resenha.image}} {% else %} Nenhuma {% endif %}</p>
+<form method="post" enctype="multipart/form-data" action = "{% url 'livros:update' resenha.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Atualizar Resenha</button>
+</form>
+<a href="{% url 'livros:index' %}">Voltar para a lista</a>
+{% endblock content %}

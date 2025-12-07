@@ -1,0 +1,11 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<h2> Deletar resenha "{{resenha.title}}"</h2>
+<form method="post" action = "{% url 'livros:delete' resenha.id %}">
+    {% csrf_token %}
+    <p> Tem certeza que deseja deletar a resenha **"{{ resenha.title }}"**?</p>
+    <button type="submit">Deletar Resenha</button>
+    <a href="{% url 'livros:index' %}" class="btn">Voltar</a>
+</form>
+{% endblock content %}
